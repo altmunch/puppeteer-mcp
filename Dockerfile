@@ -21,9 +21,6 @@ RUN mkdir -p /home/pptruser/Downloads \
 # Switch to non-root user
 USER pptruser
 
-# Debug: List files to verify they exist
-RUN ls -la /usr/src/app/
-
 # Expose port
 EXPOSE 3001
 
