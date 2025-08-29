@@ -4,10 +4,10 @@ FROM ghcr.io/puppeteer/puppeteer:21.0.0
 # Set working directory
 WORKDIR /usr/src/app
 
-# Create non-root user for security first
-RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
-    && mkdir -p /home/pptruser/Downloads \
-    && chown -R pptruser:pptruser /home/pptruser
+# Ensure pptruser exists and set up directories
+RUN mkdir -p /home/pptruser/Downloads \
+    && chown -R pptruser:pptruser /home/pptruser \
+    && chown -R pptruser:pptruser /usr/src/app
 
 # Copy package files and set ownership
 COPY --chown=pptruser:pptruser package*.json ./
