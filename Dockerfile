@@ -4,22 +4,25 @@ FROM ghcr.io/puppeteer/puppeteer:21.0.0
 # Set working directory
 WORKDIR /usr/src/app
 
-# Ensure pptruser exists and set up directories
+# Copy package files
+COPY package*.json ./
+
+# Copy application files
+COPY . .
+
+# Install dependencies as root first
+RUN npm install --omit=dev && npm cache clean --force
+
+# Set up home directory and change ownership of everything at once
 RUN mkdir -p /home/pptruser/Downloads \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /usr/src/app
 
-# Copy package files and set ownership
-COPY --chown=pptruser:pptruser package*.json ./
-
-# Copy application files first
-COPY --chown=pptruser:pptruser . .
-
-# Switch to non-root user before npm install
+# Switch to non-root user
 USER pptruser
 
-# Install dependencies
-RUN npm install --omit=dev && npm cache clean --force
+# Debug: List files to verify they exist
+RUN ls -la /usr/src/app/
 
 # Expose port
 EXPOSE 3001
