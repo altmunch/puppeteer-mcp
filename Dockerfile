@@ -12,14 +12,14 @@ RUN mkdir -p /home/pptruser/Downloads \
 # Copy package files and set ownership
 COPY --chown=pptruser:pptruser package*.json ./
 
+# Copy application files first
+COPY --chown=pptruser:pptruser . .
+
 # Switch to non-root user before npm install
 USER pptruser
 
 # Install dependencies
 RUN npm install --omit=dev && npm cache clean --force
-
-# Copy application files
-COPY --chown=pptruser:pptruser . .
 
 # Expose port
 EXPOSE 3001
