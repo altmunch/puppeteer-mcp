@@ -7,9 +7,8 @@ WORKDIR /usr/src/app
 # Copy all application files first with correct ownership
 COPY --chown=pptruser:pptruser . .
 
-# Verify critical files exist and set up home directory
-RUN ls -la /usr/src/app/server.js && \
-    mkdir -p /home/pptruser/Downloads && \
+# Set up home directory
+RUN mkdir -p /home/pptruser/Downloads && \
     chown -R pptruser:pptruser /home/pptruser
 
 # Switch to pptruser for npm install
