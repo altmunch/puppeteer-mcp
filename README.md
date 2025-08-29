@@ -21,13 +21,13 @@ HTTP API server for browser automation that Make.com can call directly.
    npm install
    npm start
    ```
-2. **Server URL:** `http://localhost:3001`
+2. **Server URL:** `http://localhost:3002`
 
 ## Make.com Integration
 
 Use **HTTP > Make a request** module:
 
-- **URL:** `https://your-app.onrender.com/{endpoint}` (or `http://localhost:3001/{endpoint}` for local)
+- **URL:** `https://your-app.onrender.com/{endpoint}` (or `http://localhost:3002/{endpoint}` for local)
 - **Method:** `POST` 
 - **Headers:** `Content-Type: application/json`
 - **Body Type:** Raw (JSON)
